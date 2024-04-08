@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     public float  verticalInput;
 
-float mousePos;
+    
      private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -23,8 +23,8 @@ float mousePos;
        horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        Vector2 mousePos = (Vector2)Camera.main.ScreenToWorldPoint(verticalInput.mousePos);
-
+        LookAtMouse();
+        
        
         
         
@@ -33,5 +33,14 @@ float mousePos;
     void FixedUpdate()
     {
          rb.velocity = new Vector3(horizontalInput * speed,0,verticalInput * speed);
+    }   
+    private void LookAtMouse()
+    {
+
+        Vector2 mousePos = (Vector3)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+         var angle = Mathf.Atan2( dir.z,dir.x)*Mathf.Rad2Deg;
+         transform.rotation = Quaternion.AngleAxis(angle,Vector3.up);
+
     }
 }
