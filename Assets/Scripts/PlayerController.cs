@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     public int score = 0;
     public float horizontalInput;
     public float  verticalInput;
+    public GameObject bullet;
+
+    public Transform gunPosition;
 
     
      private Rigidbody rb;
@@ -24,6 +27,11 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         LookAtMouse();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet,gunPosition.position ,Quaternion.identity);
+        }
         
        
         
@@ -39,8 +47,11 @@ public class PlayerController : MonoBehaviour
 
         Vector2 mousePos = (Vector3)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-         var angle = Mathf.Atan2( dir.z,dir.x)*Mathf.Rad2Deg;
+         var angle = Mathf.Atan2( dir.x,dir.y)*Mathf.Rad2Deg;
          transform.rotation = Quaternion.AngleAxis(angle,Vector3.up);
+        
+        
+       
 
     }
 }
