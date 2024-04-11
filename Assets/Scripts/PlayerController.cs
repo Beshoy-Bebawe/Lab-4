@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     public float  verticalInput;
     public GameObject bullet;
+    
 
     public Transform gunPosition;
 
@@ -30,7 +31,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(bullet,gunPosition.position ,Quaternion.identity);
+            GameObject b = Instantiate(bullet,rb.position,Quaternion.identity);
+            ProjectileScript projectile = b.GetComponent<ProjectileScript>();
+            projectile.Launch(gunPosition.position,40);
         }
         
        

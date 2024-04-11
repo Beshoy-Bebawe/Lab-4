@@ -5,17 +5,18 @@ using UnityEngine;
 public class ProjectileScript : MonoBehaviour
 {
 
-    public float speed = 50.0f;
+    Rigidbody rigidbody2d;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        rigidbody2d = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    public void Launch(Vector3 direction , float force)
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        rigidbody2d.AddForce(direction * force);
     }
+
    
 }
