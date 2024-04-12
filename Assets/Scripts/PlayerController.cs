@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform gunPosition;
 
+
+   Vector2 mousePos;
     
      private Rigidbody rb;
     // Start is called before the first frame update
@@ -31,9 +33,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject b = Instantiate(bullet,rb.position,Quaternion.identity);
+            GameObject b = Instantiate(bullet,gunPosition.position,Quaternion.identity);
             ProjectileScript projectile = b.GetComponent<ProjectileScript>();
-            projectile.Launch(gunPosition.position,40);
+            Debug.Log(transform.rotation.eulerAngles);
+            projectile.Launch(transform.rotation.eulerAngles,4000);
         }
         
        
@@ -48,13 +51,9 @@ public class PlayerController : MonoBehaviour
     private void LookAtMouse()
     {
 
-        Vector2 mousePos = (Vector3)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = (Vector3)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
          var angle = Mathf.Atan2( dir.x,dir.y)*Mathf.Rad2Deg;
          transform.rotation = Quaternion.AngleAxis(angle,Vector3.up);
-        
-        
-       
-
     }
 }
