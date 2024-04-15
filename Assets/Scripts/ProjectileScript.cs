@@ -5,17 +5,28 @@ using UnityEngine;
 public class ProjectileScript : MonoBehaviour
 {
 
-    Rigidbody rigidbody2d;
+    private Vector3 mousePos;
+    private Camera mainCam;
+    private Rigidbody rb;
+    public float force;
+    
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        rigidbody2d = GetComponent<Rigidbody>();
+     mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+     rb = GetComponent<Rigidbody>();
+     mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+     Vector2 direction = mousePos - transform.position;
+     Vector2 rotation = transform.position - mousePos;
+     rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
+     float rot = Mathf.Atan2(rotation.y , rotation.x) * Mathf.Rad2Deg;
+     transform.rotation= Quaternion.Euler(0,0 , rot + 90);
     }
 
     // Update is called once per frame
     public void Launch(Vector3 direction , float force)
     {
-        rigidbody2d.AddForce(direction * force);
+      
     }
 
    
