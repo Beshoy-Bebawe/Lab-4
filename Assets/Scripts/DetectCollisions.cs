@@ -19,6 +19,12 @@ public class DetectCollisions : MonoBehaviour
     {
         Destroy(bulletPrefab);
     }
+    if (other.gameObject.CompareTag("Enemy"))
+    {
+        
+        Destroy(other.gameObject);
+        Destroy(bulletPrefab);
+    }
 }
     void Update()
     {

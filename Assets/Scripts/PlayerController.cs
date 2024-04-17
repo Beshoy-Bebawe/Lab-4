@@ -12,9 +12,6 @@ public class PlayerController : MonoBehaviour
     
 
     public Transform gunPosition;
-    public bool canFire;
-    private float timer;
-    public float timeBetweenFiring;
 
 
    Vector2 mousePos;
@@ -34,23 +31,7 @@ public class PlayerController : MonoBehaviour
 
         LookAtMouse();
 
-        if (Input.GetMouseButtonDown(0) && canFire)
-        {
-            canFire = false;
-            GameObject b = Instantiate(bullet,gunPosition.position,Quaternion.identity);
-             
-        }
-        if (!canFire)
-        {
-            timer += Time.deltaTime;
-             if (timer > timeBetweenFiring)
-             {
-                canFire = true;
-                timer = 0;
-
-             }
-
-        }
+        
        
         
         
