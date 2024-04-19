@@ -9,6 +9,10 @@ public class SpawnManager : MonoBehaviour
     public float maxX;
     public float minZ;
     public float maxZ;
+    
+
+
+    int spawnCounter = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +29,13 @@ public class SpawnManager : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            StartSpawn();
+            spawnCounter++;
+            if(spawnCounter == 1)
+            {
+                 StartSpawn();
+                 
+            }
+           
         }
         
 
